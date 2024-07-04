@@ -38,3 +38,9 @@ def test_should_be_register_form(browser):
     page = LoginPage(browser, link)
     page.open()
     page.should_be_register_form()
+
+def test_should_be_register_form_2(browser):
+    link = "http://selenium1py.pythonanywhere.com/ru/accounts/login/"
+    page = LoginPage(browser, link)
+    page.open()
+    page.should_be_register_form()
