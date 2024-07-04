@@ -14,13 +14,14 @@ def pytest_addoption(parser):
     parser.addoption("--language", action="store",default="en-gb")
 
 @pytest.fixture(scope="function")
-def browser(request):
-    user_language = request.config.getoption("language")
-    if user_language is not None:
-        option = Options()
-        option.add_experimental_option('prefs',{'init.accept_language': user_language})
-    browser = webdriver.Chrome()
-
+def browser():
+    # user_language = request.config.getoption("language")
+    options = Options()
+    options.add_argument('--headless')
+    # if user_language is not None:
+    #     option.add_experimental_option('prefs',{'init.accept_language': user_language})
+    browser = webdriver.Chrome(options=options)
+    return browser
 
     # browser_name = request.config.getoption("browser_name")
     #
@@ -31,6 +32,6 @@ def browser(request):
     #     joined_browsers = ', '.join(supported_browsers.keys())
     #     raise pytest.UsageError(f"--browser_name is invalid, supported browsers: {joined_browsers}")
 
-    yield browser
-    print("\nquit browser..")
+    # yield browser
+    # print("\nquit browser..")
     browser.quit()
